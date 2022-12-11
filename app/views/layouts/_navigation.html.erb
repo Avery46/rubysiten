@@ -1,0 +1,110 @@
+
+
+  
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navigcolor" style="padding-top:1%;padding-bottom:3%">
+  <div class="container-fluid"> 
+                <div class="bd-navbar-toggle " style="margin-left:14px">
+               <%  if current_page?(:controller => 'lists', :action => 'index') %>
+                <button class="navbar-toggler p-2 " type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Переключить навигацию по документам">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16">
+  <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"/>
+</svg>
+                </button>
+              
+                  <%end%>
+                  </div>  
+
+                 
+
+<div class="bd-navbar-toggle ">
+       <input class="nav__checkbox navbar-toggler" id="nav__checkbox" type="checkbox" role="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" >
+      <label class="nav__toggle navbar-toggler" for="nav__checkbox">
+              <span>
+              </span>
+      </label>
+</div>  
+
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="    transition: box-shadow 0.25s cubic-bezier(0.33, 1, 0.68, 1),height 0.25s cubic-bezier(0.33, 1, 0.68, 1);">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+         <li class="nav-item lg-0">
+        <%= link_to "RubyGuide", root_path, class: "navbar-brand", id: "logo" %>
+        
+      </li>
+      <% if logged_in? %>
+       <li class="nav-item dropdown">
+         
+        <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           Lists
+          </a>
+           <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/"> <%= link_to "просмотр", lists_path, class: "dropdown-item"%></a></li>
+            <li><a class="dropdown-item" href="/"> <%= link_to "добавить", new_list_path, class: "dropdown-item"%></a></li>
+          </ul>
+       
+      </li> 
+       <% end %> 
+
+
+
+
+      <li class="nav-item">
+         <% if logged_in? && current_user.admin? &&( lists_path|| logout_path || new_list_path || edit_user_path || categories_path || new_category_path ) && current_user.admin? %>
+        <%= link_to "Bloggers", users_path, class: "nav-link" %>
+         <% end %> 
+      </li>
+     
+
+
+
+
+       <% if logged_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <%= "[Admin]" if current_user.admin? %> Профиль [<%= current_user.username %>]
+          </a>
+                    <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"> <%= link_to "просмотр", user_path(current_user), class: "dropdown-item"  %></a></li>
+            <li><a class="dropdown-item" href="#"><%= link_to "изменить", edit_user_path(current_user), class: "dropdown-item" %></a></li>
+            <li><hr class="dropdown-divider"></li> 
+            <li><a class="dropdown-item" href="#"> <%= link_to "удалить", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Вы точно хотите удалить профиль?" } %></a></li>
+          </ul>
+        </li>
+        
+
+     
+        <li class="nav-item">
+          <%= link_to 'Выход', logout_path, class: "nav-link", method: :delete %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Вход', login_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Регистрация', signup_path, class: "nav-link" %>
+        </li>
+    <% end %>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+        <button class="btn btn-outline-danger" type="submit">Поиск</button>
+       
+      </form>
+     
+    </div>
+  </div>
+</nav>
+
+  
+
+

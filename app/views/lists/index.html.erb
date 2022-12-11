@@ -1,0 +1,30 @@
+
+
+
+
+<div class="row mt-5">
+<div  class="col-md-3 col-lg-3 col-sm-0">
+  <%= render 'offcanvas'%>
+</div>
+
+
+
+<div  class="col-md-9 col-lg-9 col-sm-12" >
+  <div class="flickr_pagination ">
+    <%= will_paginate @lists, :container => false %>
+  </div>
+  <%= render 'list' %>
+  <div class="flickr_pagination  mb-4" >
+    <%= will_paginate @lists, :container => false %>
+  </div> 
+</div>
+
+</div>
+
+
+
+
+
+
+
+

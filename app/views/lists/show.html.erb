@@ -1,0 +1,32 @@
+
+
+  <h2 class="text-center mt-4"><%= @list.title %></h2>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class=" mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header cimg font-italic">
+            by <%= @list.user.username if @list.user %>
+        
+            <% if @list.categories.any? %>
+              <div class="mt-2"><%= render @list.categories %> </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <div class="card-text text-left"><%= simple_format(@list.description) %></div>
+            <% if logged_in? && (@list.user == current_user || current_user.admin?)%>
+            <%= link_to "Изменить", edit_list_path(@list), class: "btn btn-outline-danger" %>
+            <%= link_to "Удалить", list_path(@list), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <% end %>
+          </div>
+          <div class="card-footer text-muted cimg">
+            <small>Created <%= time_ago_in_words(@list.created_at) %> ago, 
+            edited <%= time_ago_in_words(@list.updated_at) %> ago</small>
+          </div>
+        </div>
+        
+      </div>
+       
+    </div>
+  </div>
+
